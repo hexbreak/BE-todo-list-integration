@@ -15,9 +15,17 @@ export function Home() {
 	const [userInput, setUserInput] = useState([""]);
 
 	const handleKeyUp = event => {
-		if (event.keyCode == 13) {
+		if (event.keyCode == 13 && userInput != "") {
 			getList(theList.concat(userInput));
+			setUserInput("");
 		}
+	};
+
+	const itemDelete = event => {
+		var updatedList = theList.filter(
+			(task, taskIndex) => index != taskIndex
+		);
+		getList(updatedList);
 	};
 
 	return (
@@ -29,14 +37,22 @@ export function Home() {
 					onChange={event => setUserInput(event.target.value)}
 					// event.target.value and value have no relation to each other.
 					value={userInput}
-					onkeyUp={handleKeyUp}
+					onKeyUp={handleKeyUp}
 				/>
-				<button className="addButton">click to add!</button>
 				<ul className="list-group">
 					{theList.map((value, index) => {
 						return (
 							<li className="list-group-item" key={index}>
 								{value}
+								<button
+									type="button"
+									// onClick is an attribute, the function code runs if its {itemDelete}, so you must
+									// run onClick with an arrow function in order to run when the user clicks
+									// onClick runs as soon as the page loads if it's not on an arrow function
+									onClick={() => itemDelete(index)}
+									className="btn btn-primary">
+									X
+								</button>
 							</li>
 						);
 					})}
