@@ -21,14 +21,6 @@ export function Home() {
 		}
 	};
 
-	/*
-	const itemDelete = event => {
-		var updatedList = theList.filter(
-			(task, taskIndex) => index != taskIndex
-		);
-		getList(updatedList);
-    };
-    */
 	const itemDelete = index => {
 		var updatedList = theList.filter(
 			(task, taskIndex) => index != taskIndex
@@ -37,8 +29,9 @@ export function Home() {
 	};
 
 	return (
-		<div className="text-center mt-5">
-			<div className="todoList">
+		<div className="d-flex mx-auto justify-content-center">
+			<h1>TODOs</h1>
+			<div className="card">
 				<input
 					className="todoInput"
 					// event can be named anything since the arrow function knows what to do
@@ -47,7 +40,7 @@ export function Home() {
 					value={userInput}
 					onKeyUp={handleKeyUp}
 				/>
-				<ul className="list-group">
+				<ul className="list-group list-group-flush">
 					{theList.map((value, index) => {
 						return (
 							<li className="list-group-item" key={index}>

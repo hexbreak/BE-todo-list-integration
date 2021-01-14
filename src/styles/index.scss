@@ -1,1 +1,8 @@
 @import "~bootstrap/scss/bootstrap.scss";
+
+.card {
+    width: 34rem;
+    border-radius: 0px;
+    background: #ffffff;
+    box-shadow:  29px 29px 58px #d4d4d4, -29px -29px 58px #ffffff;
+}
