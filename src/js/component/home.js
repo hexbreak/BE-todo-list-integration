@@ -16,7 +16,10 @@ export function Home() {
 	return (
 		<div className="text-center mt-5">
 			<div className="todoList">
-				<input className="todoInput" />
+				<input
+					className="todoInput" // event can be named anything since the arrow function knows what to do
+					onChange={event => setUserInput(event.target.value)}
+				/>
 				<button className="addButton">click to add!</button>
 				<ul className="list-group">
 					{theList.map((value, index) => {
