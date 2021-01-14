@@ -21,7 +21,15 @@ export function Home() {
 		}
 	};
 
+	/*
 	const itemDelete = event => {
+		var updatedList = theList.filter(
+			(task, taskIndex) => index != taskIndex
+		);
+		getList(updatedList);
+    };
+    */
+	const itemDelete = index => {
 		var updatedList = theList.filter(
 			(task, taskIndex) => index != taskIndex
 		);
