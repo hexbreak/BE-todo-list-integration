@@ -62,7 +62,9 @@ export function Home() {
 							);
 						})}
 						<div className="footer text-left text-muted p-2 py-1">
-							{theList.length} items left.
+							{theList.length === 0
+								? "There are no tasks, start adding!"
+								: theList.length + " items left."}
 						</div>
 					</ul>
 				</div>
