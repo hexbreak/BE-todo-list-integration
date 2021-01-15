@@ -52,7 +52,9 @@ export function Home() {
 					<ul className="list-group list-group-flush">
 						{theList.map((value, index) => {
 							return (
-								<li className="list-group-item" key={index}>
+								<li
+									className="list-group-item mx-1 py-1"
+									key={index}>
 									{value}
 									<button
 										type="button"
@@ -60,7 +62,7 @@ export function Home() {
 										// run onClick with an arrow function in order to run when the user clicks
 										// onClick runs as soon as the page loads if it's not on an arrow function
 										onClick={() => itemDelete(index)}
-										className="btn btn-primary">
+										className="btn btn-light float-right">
 										X
 									</button>
 								</li>
