@@ -66,11 +66,8 @@ export function Home() {
 								</li>
 							);
 						})}
-						<div
-							className="footer-copyright text-center py-3"
-							// style={{ display: condition ? is-it-true? : result }}
-						>
-							No tasks, add a task!
+						<div className="footer text-left text-muted p-2 py-1">
+							{theList.length} items left.
 						</div>
 					</ul>
 				</div>
@@ -78,3 +75,7 @@ export function Home() {
 		</div>
 	);
 }
+
+/* using style for ternary conditions to hide/show footer for announcing no list on todos
+style={{ display : condition ? is-it-true? : show }}
+*/
