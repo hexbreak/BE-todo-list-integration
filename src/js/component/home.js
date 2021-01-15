@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { RiDeleteBin7Line } from "react-icons/ri";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
@@ -62,8 +63,8 @@ export function Home() {
 										// run onClick with an arrow function in order to run when the user clicks
 										// onClick runs as soon as the page loads if it's not on an arrow function
 										onClick={() => itemDelete(index)}
-										className="btn btn-light float-right">
-										X
+										className="btn float-right">
+										<RiDeleteBin7Line />
 									</button>
 								</li>
 							);
