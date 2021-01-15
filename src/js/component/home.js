@@ -7,9 +7,9 @@ import rigoImage from "../../img/rigo-baby.jpg";
 //create your first component
 export function Home() {
 	const [theList, getList] = useState([
-		"clean the house",
-		"go shopping",
-		"wash the car"
+		"Let's clean the house as a group!",
+		"Buy the required materials for the upcoming semester.",
+		"Mow the Lawn."
 	]);
 	// on useState, if you change whats inside the square brackets, it will  fill the input field to whatever is inside
 	// the input field is now in control of the userinput
