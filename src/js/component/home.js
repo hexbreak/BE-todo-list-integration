@@ -28,6 +28,14 @@ export function Home() {
 		getList(updatedList);
 	};
 
+	/* // testing ternary operator to hide/show when no tasks are on the todo list.
+
+    const taskFooter = event => {
+        if (event.)
+    }
+
+    */
+
 	return (
 		<div className="container">
 			<h1 className="text-center">ToDo List</h1>
@@ -58,6 +66,12 @@ export function Home() {
 								</li>
 							);
 						})}
+						<div
+							className="footer-copyright text-center py-3"
+							// style={{ display: condition ? is-it-true? : result }}
+						>
+							No tasks, add a task!
+						</div>
 					</ul>
 				</div>
 			</div>
