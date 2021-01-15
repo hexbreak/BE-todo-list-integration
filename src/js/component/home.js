@@ -30,7 +30,7 @@ export function Home() {
 
 	return (
 		<div className="d-flex mx-auto justify-content-center">
-			<h1>TODOs</h1>
+			<h1 className="row">TODOs</h1>
 			<div className="card">
 				<input
 					className="todoInput"
