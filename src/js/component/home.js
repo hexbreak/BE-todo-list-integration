@@ -70,7 +70,3 @@ export function Home() {
 		</div>
 	);
 }
-
-/* using style for ternary conditions to hide/show footer for announcing no list on todos
-style={{ display : condition ? is-it-true? : show }}
-*/
