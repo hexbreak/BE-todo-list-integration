@@ -31,11 +31,11 @@ export function Home() {
 
 	return (
 		<div className="container">
-			<h1 className="text-center">ToDo List</h1>
+			<div className="header text-center">TODOs</div>
 			<div className="d-flex mx-auto justify-content-center">
 				<div className="card">
 					<input
-						className="todoInput"
+						className="todoInput py-2"
 						// event can be named anything since the arrow function knows what to do
 						onChange={event => setUserInput(event.target.value)}
 						// event.target.value and value have no relation to each other.

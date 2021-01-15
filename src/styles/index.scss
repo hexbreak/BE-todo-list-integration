@@ -1,7 +1,19 @@
 @import "~bootstrap/scss/bootstrap.scss";
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
 
 .container {
     margin-top: 350px;
+}
+
+.header {
+    font-family: 'Dancing Script', cursive;
+    font-size: 66px;
+}
+
+.todoInput {
+    border-style: hidden;
+    background: white;
+    outline: none;
 }
 
 .card {
