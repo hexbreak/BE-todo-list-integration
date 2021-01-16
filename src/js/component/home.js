@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
 
 //include images into your bundle
@@ -6,18 +6,32 @@ import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
 export function Home() {
-	const [theList, getList] = useState([
-		"Let's clean the house as a group!",
-		"Buy the required materials for the upcoming semester.",
-		"Mow the Lawn."
-	]);
+	const [theList, setList] = useState([]);
 	// on useState, if you change whats inside the square brackets, it will  fill the input field to whatever is inside
 	// the input field is now in control of the userinput
 	const [userInput, setUserInput] = useState([""]);
 
+	useEffect(() => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/rscarfullery")
+			.then(function(response) {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+				// Read the response as json.
+				return response.json();
+			})
+			.then(function(responseAsJson) {
+				// Do stuff with the JSON
+				setList(responseAsJson);
+			})
+			.catch(function(error) {
+				console.log("Looks like there was a problem: \n", error);
+			});
+	}, []);
+
 	const handleKeyUp = event => {
 		if (event.keyCode == 13 && userInput != "") {
-			getList(theList.concat(userInput));
+			setList(theList.concat(userInput));
 			setUserInput("");
 		}
 	};
@@ -26,7 +40,7 @@ export function Home() {
 		var updatedList = theList.filter(
 			(task, taskIndex) => index != taskIndex
 		);
-		getList(updatedList);
+		setList(updatedList);
 	};
 
 	return (
@@ -48,7 +62,7 @@ export function Home() {
 								<li
 									className="list-group-item mx-1 py-1"
 									key={index}>
-									{value}
+									{value.label}
 									<button
 										type="button"
 										// onClick is an attribute, the function code runs if its {itemDelete}, so you must
