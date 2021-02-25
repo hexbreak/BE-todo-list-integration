@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { RiDeleteBin7Line } from "react-icons/ri";
+import { AiFillCheckSquare } from "react-icons/ai";
 
 //include images into your bundle
 import rigoImage from "../../img/rigo-baby.jpg";
@@ -11,10 +12,10 @@ export function Home() {
 	// the input field is now in control of the userinput
 	const [userInput, setUserInput] = useState([""]);
 
+	const URL = "https://3000-aquamarine-otter-6co5ssm1.ws-us03.gitpod.io"; // not sure to leave it here for review or not?
+
 	useEffect(() => {
-		fetch(
-			"https://3000-silver-donkey-jhyd28lw.ws-us03.gitpod.io/todolist/David!"
-		)
+		fetch(`${URL}/todolist/rolando`)
 			.then(function(response) {
 				if (!response.ok) {
 					throw Error(response.statusText);
@@ -40,21 +41,18 @@ export function Home() {
 				})
 			);
 
-			fetch(
-				"https://3000-silver-donkey-jhyd28lw.ws-us03.gitpod.io/todolist",
-				{
-					method: "POST",
-					body: JSON.stringify({
-						user: "David!",
-						label: userInput,
-						done: false
-					}),
-					// label, done
-					headers: {
-						"Content-Type": "application/json"
-					}
+			fetch(`${URL}/todolist`, {
+				method: "POST",
+				body: JSON.stringify({
+					user: "rolando",
+					label: userInput,
+					done: false
+				}),
+				// label, done
+				headers: {
+					"Content-Type": "application/json"
 				}
-			)
+			})
 				.then(response => {
 					if (!response.ok) {
 						throw Error(response.statusText);
@@ -64,25 +62,47 @@ export function Home() {
 				.then(response => {
 					console.log("Success:", response);
 					setList(response);
+					setUserInput([""]);
 				})
 				.catch(error => console.error("Error:", error));
 		}
+	};
+	const modifyTask = (id, label) => {
+		fetch(`${URL}/todolist/` + id, {
+			method: "PUT",
+			body: JSON.stringify({
+				user: "rolando",
+				label: label,
+				done: true
+			}),
+			// label, done
+			headers: {
+				"Content-Type": "application/json"
+			}
+		})
+			.then(response => {
+				if (!response.ok) {
+					throw Error(response.statusText);
+				}
+				return response.json();
+			})
+			.then(response => {
+				console.log("Success:", response);
+				setList(response);
+			})
+			.catch(error => console.error("Error:", error));
 	};
 	// handleKeyUp from onKeyUp on input text with event passed as default
 	// check if event keycode is 13 (enter) and input is not blank to continue
 	// use state setList to add concat version of userInput into theList
 
 	const itemDelete = id => {
-		fetch(
-			"https://3000-silver-donkey-jhyd28lw.ws-us03.gitpod.io/todolist/David!/" +
-				id,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json"
-				}
+		fetch(`${URL}/todolist/rolando/` + id, {
+			method: "DELETE",
+			headers: {
+				"Content-Type": "application/json"
 			}
-		)
+		})
 			.then(response => {
 				if (!response.ok) {
 					throw Error(response.statusText);
@@ -117,6 +137,14 @@ export function Home() {
 									className="list-group-item mx-1 py-1"
 									key={index}>
 									{value.label}
+									<button
+										type="button"
+										className="btn float-right"
+										onClick={() =>
+											modifyTask(value.id, value.label)
+										}>
+										<AiFillCheckSquare />
+									</button>
 									<button
 										type="button"
 										// onClick is an attribute, the function code runs if its {itemDelete}, so you must
