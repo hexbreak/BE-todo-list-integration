@@ -12,7 +12,9 @@ export function Home() {
 	const [userInput, setUserInput] = useState([""]);
 
 	useEffect(() => {
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/rscarfullery")
+		fetch(
+			"https://3000-silver-donkey-jhyd28lw.ws-us03.gitpod.io/todolist/David!"
+		)
 			.then(function(response) {
 				if (!response.ok) {
 					throw Error(response.statusText);
@@ -39,15 +41,14 @@ export function Home() {
 			);
 
 			fetch(
-				"https://assets.breatheco.de/apis/fake/todos/user/rscarfullery",
+				"https://3000-silver-donkey-jhyd28lw.ws-us03.gitpod.io/todolist",
 				{
-					method: "PUT",
-					body: JSON.stringify(
-						theList.concat({
-							label: userInput,
-							done: false
-						})
-					),
+					method: "POST",
+					body: JSON.stringify({
+						user: "David!",
+						label: userInput,
+						done: false
+					}),
 					// label, done
 					headers: {
 						"Content-Type": "application/json"
@@ -62,25 +63,7 @@ export function Home() {
 				})
 				.then(response => {
 					console.log("Success:", response);
-					fetch(
-						"https://assets.breatheco.de/apis/fake/todos/user/rscarfullery"
-					)
-						.then(function(response) {
-							if (!response.ok) {
-								throw Error(response.statusText);
-							}
-							return response.json(); // Read the response as json.
-						})
-						.then(function(responseAsJson) {
-							setList(responseAsJson); // Set json into list
-							setUserInput("");
-						})
-						.catch(function(error) {
-							console.log(
-								"Looks like there was a problem: \n",
-								error
-							);
-						});
+					setList(response);
 				})
 				.catch(error => console.error("Error:", error));
 		}
@@ -89,20 +72,17 @@ export function Home() {
 	// check if event keycode is 13 (enter) and input is not blank to continue
 	// use state setList to add concat version of userInput into theList
 
-	const itemDelete = index => {
-		var updatedList = theList.filter(
-			(task, taskIndex) => index != taskIndex
-		);
-		setList(updatedList);
-
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/rscarfullery", {
-			method: "PUT",
-			body: JSON.stringify(updatedList),
-			// label, done
-			headers: {
-				"Content-Type": "application/json"
+	const itemDelete = id => {
+		fetch(
+			"https://3000-silver-donkey-jhyd28lw.ws-us03.gitpod.io/todolist/David!/" +
+				id,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json"
+				}
 			}
-		})
+		)
 			.then(response => {
 				if (!response.ok) {
 					throw Error(response.statusText);
@@ -111,24 +91,7 @@ export function Home() {
 			})
 			.then(response => {
 				console.log("Success:", response);
-				fetch(
-					"https://assets.breatheco.de/apis/fake/todos/user/rscarfullery"
-				)
-					.then(function(response) {
-						if (!response.ok) {
-							throw Error(response.statusText);
-						}
-						return response.json(); // Read the response as json.
-					})
-					.then(function(responseAsJson) {
-						setList(responseAsJson); // Set json into list
-					})
-					.catch(function(error) {
-						console.log(
-							"Looks like there was a problem: \n",
-							error
-						);
-					});
+				setList(response);
 			})
 			.catch(error => console.error("Error:", error));
 	};
@@ -159,7 +122,7 @@ export function Home() {
 										// onClick is an attribute, the function code runs if its {itemDelete}, so you must
 										// run onClick with an arrow function in order to run when the user clicks
 										// onClick runs as soon as the page loads if it's not on an arrow function
-										onClick={() => itemDelete(index)}
+										onClick={() => itemDelete(value.id)}
 										className="btn float-right">
 										<RiDeleteBin7Line />
 									</button>
